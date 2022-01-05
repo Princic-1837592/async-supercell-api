@@ -1,0 +1,3 @@
+Clash Royale types
+==================
+
