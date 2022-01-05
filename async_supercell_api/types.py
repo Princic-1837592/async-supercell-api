@@ -74,6 +74,7 @@ class Page(SupercellApiResponse, Generic[T]):
         :type paging: Optional[Dict[str, Any]]
         :type _page_generic_type:
         """
+        
         super().__init__(**kwargs)
         self.items: List[T] = None if items is None else list(map(lambda x: _page_generic_type(**x), items))
         self.paging = paging

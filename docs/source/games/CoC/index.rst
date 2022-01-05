@@ -1,6 +1,6 @@
 Clash of Clans API
 ==================
 
-.. automodule:: async_supercell_api.clash_of_clans
+.. automodule:: async_supercell_api.clash_of_clans.__init__
     :members:
     :member-order: bysource
