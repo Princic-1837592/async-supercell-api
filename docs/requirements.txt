@@ -1,0 +1,6 @@
+aiohttp
+sphinx
+sphinx_rtd_theme
+sphinx_copybutton
+pypandoc
+sphinx-autobuild
