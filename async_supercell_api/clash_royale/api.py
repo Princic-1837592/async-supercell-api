@@ -72,6 +72,18 @@ class ClashRoyaleAPI:
                           minMembers: Optional[int] = None, maxMembers: Optional[int] = None,
                           minScore: Optional[int] = None, limit: Optional[int] = None,
                           after: Optional[str] = None, before: Optional[str] = None) -> Page[Clan]:
+        """
+        
+        :param name:
+        :param locationId:
+        :param minMembers:
+        :param maxMembers:
+        :param minScore:
+        :param limit:
+        :param after:
+        :param before:
+        :return:
+        """
         
         return await ClashRoyaleAPI.__create_object(
             await self.__make_api_request(
