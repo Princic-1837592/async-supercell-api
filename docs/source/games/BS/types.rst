@@ -1,6 +1,6 @@
 Clash Royale types
 ==================
 
-.. automodule:: ~async_supercell_api.clash_royale.types
+.. currentmodule:: async_supercell_api.clash_royale.types
     :members:
     :member-order: bysource
