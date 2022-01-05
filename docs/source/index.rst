@@ -29,7 +29,7 @@ After installing, verify the installation:
     :hidden:
     :caption: Available games
 
-    api/index
-    api/BS/index
-    api/CoC/index
-    api/CR/index
+    api/
+    api/BS/
+    api/CoC/
+    api/CR/
