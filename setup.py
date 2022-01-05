@@ -11,7 +11,7 @@ setuptools.setup(
     description = 'Async wrapper for Supercell API',
     long_description = long_description,
     long_description_content_type = 'text/markdown',
-    url = 'https://github.com/Princic-1837592/async-supercell-api',
+    url = 'https://async-supercell-api.readthedocs.io/en/latest/',
     packages = ['async_supercell_api'],
     python_requires = '>=3.7',
     install_requires = [

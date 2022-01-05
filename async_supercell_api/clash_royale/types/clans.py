@@ -75,7 +75,7 @@ class Clan(SupercellApiResponse):
         self.clanChestStatus = clanChestStatus
         self.clanChestLevel = clanChestLevel
         self.name = name
-        self.location = None if memberList is None else Location(**location)
+        self.location = None if location is None else Location(**location)
         self.type = type
         self.members = members
         self.description = description

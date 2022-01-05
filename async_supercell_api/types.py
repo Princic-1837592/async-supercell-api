@@ -1,4 +1,4 @@
-from typing import Any, Dict, Generic, List, Optional, TypeVar
+from typing import Any, Dict, Generic, List, Optional, Type, TypeVar
 
 
 class SupercellApiResponse:
@@ -62,7 +62,8 @@ T = TypeVar('T')
 
 
 class Page(SupercellApiResponse, Generic[T]):
-    def __init__(self, items: Optional[List[T]] = None, paging: Optional[Dict[str, Any]] = None, **kwargs):
+    def __init__(self, items: Optional[List[T]] = None, paging: Optional[Dict[str, Any]] = None,
+                 _page_generic_type: Optional[Type[SupercellApiResponse]] = None, **kwargs):
         super().__init__(**kwargs)
-        self.items: List[T] = None if items is None else list(map(lambda x: SupercellApiResponse(**x), items))
+        self.items: List[T] = None if items is None else list(map(lambda x: _page_generic_type(**x), items))
         self.paging = paging
