@@ -1,6 +1,5 @@
 Clash Royale API
 ================
 
-.. automodule:: async_supercell_api.clash_royale.api
-    :members:
-    :member-order: bysource
+Learn more about :doc:`Clash Royale class <api>`
+Learn more about :doc:`Clash Royale types <types>`
