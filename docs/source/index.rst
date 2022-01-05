@@ -1,5 +1,5 @@
 Welcome to async-supercell-api documentation!
-========================================
+=============================================
 
 async-supercell-api is a Python library for `Supercell <https://supercell.com/en/>`_'s games' players (currently only Clash Royale)
 that offers an async and simple-to-use implementation of the Supercell APIs based on `Asyncio <https://docs.python.org/3/library/asyncio.html>`_.
