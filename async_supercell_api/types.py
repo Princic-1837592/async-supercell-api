@@ -26,7 +26,7 @@ class SupercellApiResponse:
         :type nl: str
         """
         
-        def recursion(obj, level: int = level, sep = sep):
+        def recursion(obj, level: int = level, sep = sep) -> str:
             if isinstance(obj, SupercellApiResponse):
                 return obj.to_string(level = level + 1, sep = sep)
             if isinstance(obj, list):
@@ -44,7 +44,7 @@ class SupercellApiResponse:
             f',{nl}{sep * (level + 1)}'.join(
                 '{} = {}'.format(*item) for item in map(
                     lambda x: (x[0], recursion(x[1])),
-                    filter(lambda x: x[0] not in to_skip, vars(self).items())
+                    filter(lambda x: x[0] not in to_skip and x[1] is not None, vars(self).items())
                 )
             ),
             nl,

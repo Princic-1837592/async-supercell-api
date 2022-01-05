@@ -1,1 +1,1 @@
-from . import clans
+from . import clans, players
