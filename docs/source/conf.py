@@ -25,6 +25,7 @@ extensions = [
     'sphinx.ext.intersphinx',
 ]
 autosummary_generate = True
+autodoc_typehints = 'description'
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
