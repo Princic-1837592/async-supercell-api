@@ -3,7 +3,7 @@ Available games
 
 .. autosummary::
     :toctree: _autosummary
+    :template: custom-module-template.rst
     :recursive:
-    :template: module.rst
 
     async_supercell_api
