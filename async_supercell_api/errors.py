@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 
 class ClientError(Exception):
     """
-    Generic exception. contains all the information from the error response.
+    Generic exception. contains all the information about the error response.
     
     :param reason:
     :param message:

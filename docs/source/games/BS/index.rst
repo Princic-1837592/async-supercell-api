@@ -1,8 +1,8 @@
 Brawl Stars API
-================
+===============
 
 .. autosummary::
-    :toctree: _brawl_stars
+    :toctree: _autosummary
     :recursive:
 
     async_supercell_api.brawl_stars
