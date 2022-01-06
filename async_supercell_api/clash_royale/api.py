@@ -1,12 +1,10 @@
-from urllib.parse import urlencode, quote
-from typing import Any, List, Optional, Tuple, Type
-from aiohttp import request
+from typing import List, Optional
 from . import types
-from .. import errors
-from ..types import Page, SupercellApiResponse
+from ..api import SupercellAPI
+from ..types import Page
 
 
-class ClashRoyaleAPI:
+class ClashRoyaleAPI(SupercellAPI):
     """
     Class to interact with Clash Royale APIs
     
@@ -15,46 +13,9 @@ class ClashRoyaleAPI:
     :type api_key: str
     :type debug: Optional[bool]
     """
-    __BASE_URL: str = 'https://api.clashroyale.com'
-    __VERSION: str = 'v1'
     
     def __init__(self, api_key: str, debug: bool = False):
-        self.api_key = api_key
-        self.debug = debug
-    
-    @staticmethod
-    async def __make_request(url: str, method: str = 'GET', headers: dict = None, debug: bool = False) -> Tuple[
-        int, Any]:
-        if headers is None:
-            headers = {}
-        async with request(method, url, headers = headers) as response:
-            if debug:
-                print(response.status, url)
-            return response.status, await response.json()
-    
-    async def __make_api_request(self, url: str, **kwargs: Any) -> Tuple[int, Any]:
-        kwargs = {n: v for n, v in kwargs.items() if v is not None}
-        encoded_kwargs = f'?{urlencode(kwargs)}' if kwargs else ''
-        return await ClashRoyaleAPI.__make_request(
-            f'{ClashRoyaleAPI.__BASE_URL}/{ClashRoyaleAPI.__VERSION}/{quote(url.lstrip("/"))}{encoded_kwargs}',
-            headers = {'Authorization': f'Bearer {self.api_key}'},
-            debug = self.debug
-        )
-    
-    @staticmethod
-    async def __create_object(response: Tuple[int, Any], object_class: Type[SupercellApiResponse] = Page,
-                              page_generic_type: Optional[Type[SupercellApiResponse]] = None) -> Any:
-        status, json_response = response
-        if 200 <= status < 300:
-            t = type(json_response)
-            if object_class is not None:
-                if t == dict:
-                    return object_class(**json_response, _page_generic_type = page_generic_type)
-                if t == list:
-                    return list(map(lambda x: object_class(**x), json_response))
-            return json_response
-        else:
-            raise errors.ClientError(**(json_response or {}))
+        super(ClashRoyaleAPI, self).__init__('https://api.clashroyale.com', 'v1', api_key, debug)
     
     # clans
     async def get_clan_war_log(self, clanTag: str, limit: Optional[int] = None, after: Optional[str] = None,
@@ -76,8 +37,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page` [:class:`~types.clans.ClanWarLogEntry`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/clans/{clanTag}/warlog',
                 limit = limit,
                 after = after,
@@ -118,8 +79,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.clans.Clan`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 '/clans',
                 name = name,
                 locationId = locationId,
@@ -152,8 +113,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.clans.RiverRaceLogEntry`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/clans/{clanTag}/riverracelog',
                 limit = limit,
                 after = after,
@@ -173,8 +134,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/clans/{clanTag}/currentwar'
             ),
             types.clans.CurrentClanWar
@@ -191,8 +152,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/clans/{clanTag}'
             ),
             types.clans.Clan
@@ -217,8 +178,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.clans.ClanMember`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/clans/{clanTag}/members',
                 limit = limit,
                 after = after,
@@ -238,8 +199,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/clans/{clanTag}/currentriverrace'
             ),
             types.clans.CurrentRiverRace
@@ -257,8 +218,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/players/{playerTag}'
             ),
             types.players.Player
@@ -275,8 +236,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/players/{playerTag}/upcomingchests'
             ),
             types.players.UpcomingChests
@@ -294,8 +255,8 @@ class ClashRoyaleAPI:
         :rtype: List[:class:`~types.players.Battle`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/players/{playerTag}/battlelog'
             ),
             types.players.Battle
@@ -319,8 +280,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.players.Item`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 '/cards',
                 limit = limit,
                 after = after,
@@ -351,8 +312,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.tournaments.TournamentHeader`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 '/tournaments',
                 name = name,
                 limit = limit,
@@ -373,8 +334,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/tournaments/{tournamentTag}'
             ),
             types.tournaments.Tournament
@@ -400,8 +361,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.ClanRanking`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/{locationId}/rankings/clans',
                 limit = limit,
                 after = after,
@@ -429,8 +390,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.PlayerRanking`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/{locationId}/rankings/players',
                 limit = limit,
                 after = after,
@@ -458,8 +419,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.ClanRanking`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/{locationId}/rankings/clanwars',
                 limit = limit,
                 after = after,
@@ -481,8 +442,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/global/seasons/{seasonId}',
             ),
             types.locations.LeagueSeason
@@ -508,8 +469,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.PlayerRanking`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/global/seasons/{seasonId}/rankings/players',
                 limit = limit,
                 after = after,
@@ -536,8 +497,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.LeagueSeason`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/global/seasons',
                 limit = limit,
                 after = after,
@@ -563,8 +524,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.Location`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations',
                 limit = limit,
                 after = after,
@@ -584,8 +545,8 @@ class ClashRoyaleAPI:
         :return:
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/{locationId}'
             ),
             types.locations.Location
@@ -611,8 +572,8 @@ class ClashRoyaleAPI:
         :rtype: :class:`Page`[:class:`~types.locations.LadderTournamentRanking`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/locations/global/rankings/tournaments/{tournamentTag}',
                 limit = limit,
                 after = after,
@@ -632,8 +593,8 @@ class ClashRoyaleAPI:
         :rtype: List[:class:`~types.global_tournaments.LadderTournament`]
         """
         
-        return await ClashRoyaleAPI.__create_object(
-            await self.__make_api_request(
+        return await self.create_object(
+            await self.make_api_request(
                 f'/globaltournaments'
             ),
             types.global_tournaments.LadderTournament

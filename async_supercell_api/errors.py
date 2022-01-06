@@ -17,7 +17,7 @@ class ClientError(Exception):
     
     def __init__(self, reason: Optional[str] = None, message: Optional[str] = 'Unknown error',
                  type: Optional[str] = None, detail: Optional[Dict[str, Any]] = None, **kwargs):
-        super().__init__(message)
+        super().__init__(f'Message: {message}. Reason: {reason}')
         self.reason = reason
         self.message = message
         self.type = type
