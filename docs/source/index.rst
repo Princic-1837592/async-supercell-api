@@ -23,7 +23,10 @@ After installing, verify the installation:
 
 .. code-block:: python
 
-    from async_supercell_api.clash_royale import ClashRoyaleAPI
+    from async_supercell_api import ClashRoyaleAPI, ClashOfClansAPI
+
+    cr_api = ClashRoyaleAPI('api_key')
+    coc_api = ClashOfClansAPI('api_key')
 
 .. toctree::
     :hidden:
