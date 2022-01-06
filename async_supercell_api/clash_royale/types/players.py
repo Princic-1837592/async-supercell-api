@@ -28,6 +28,47 @@ class GameMode(SupercellApiResponse):
 
 
 class Battle(SupercellApiResponse):
+    """
+    Type representing a battle.
+    
+    :param gameMode:
+    :param arena:
+    :param type:
+    :param deckSelection:
+    :param opponent:
+    :param challengeWinCountBefore:
+    :param boatBattleSide:
+    :param boatBattleWon:
+    :param newTowersDestroyed:
+    :param prevTowersDestroyed:
+    :param remainingTowers:
+    :param team:
+    :param battleTime:
+    :param challengeId:
+    :param tournamentTag:
+    :param challengeTitle:
+    :param isLadderTournament:
+    :param isHostedMatch:
+    :type gameMode: :class:`GameMode`
+    :type arena: :class:`Arena`
+    :type type: str
+    :type deckSelection: str
+    :type opponent: :class:`PlayerBattleData`
+    :type challengeWinCountBefore: int
+    :type boatBattleSide: str
+    :type boatBattleWon: bool
+    :type newTowersDestroyed: int
+    :type prevTowersDestroyed: int
+    :type remainingTowers: int
+    :type team: :class:`PlayerBattleData`
+    :type battleTime: str
+    :type challengeId: int
+    :type tournamentTag: str
+    :type challengeTitle: str
+    :type isLadderTournament: bool
+    :type isHostedMatch: bool
+    """
+    
     def __init__(self, gameMode: Optional[dict] = None, arena: Optional[dict] = None, type: Optional[str] = None,
                  deckSelection: Optional[str] = None, opponent: Optional[List[dict]] = None,
                  challengeWinCountBefore: Optional[int] = None, boatBattleSide: Optional[str] = None,
