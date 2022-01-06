@@ -50,7 +50,7 @@ class Battle(SupercellApiResponse):
     :param isLadderTournament:
     :param isHostedMatch:
     :type gameMode: :class:`GameMode`
-    :type arena: :class:`Arena`
+    :type arena: :class:`~.clans.Arena`
     :type type: str
     :type deckSelection: str
     :type opponent: :class:`PlayerBattleData`
