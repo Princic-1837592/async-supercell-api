@@ -62,19 +62,19 @@ T = TypeVar('T')
 
 
 class Page(SupercellApiResponse, Generic[T]):
+    """
+    Object representing a list of items. It's returned by all the methods that have the 'limit', 'after' and 'before' parameters.
+    
+    :param items: list of items
+    :param paging: info about the current, next and previous pages
+    :param _page_generic_type: private type parameter, only used for generalization
+    :type items: Optional[List[:class:`SupercellApiResponse`]]
+    :type paging: Optional[Dict[str, Any]]
+    :type _page_generic_type: Optional[Type[:class:`SupercellApiResponse`]]
+    """
+    
     def __init__(self, items: Optional[List[T]] = None, paging: Optional[Dict[str, Any]] = None,
                  _page_generic_type: Optional[Type[SupercellApiResponse]] = None, **kwargs):
-        """
-        Object representing a list of items. It's returned by all the methods that have the 'limit', 'after' and 'before' parameters.
-        
-        :param items: list of items
-        :param paging: info about the current, next and previous pages
-        :param _page_generic_type: private type, only used for generalization
-        :type items: Optional[List[:class:`SupercellApiResponse`]]
-        :type paging: Optional[Dict[str, Any]]
-        :type _page_generic_type:
-        """
-        
         super().__init__(**kwargs)
         self.items: List[T] = None if items is None else list(map(lambda x: _page_generic_type(**x), items))
         self.paging = paging

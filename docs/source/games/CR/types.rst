@@ -1,5 +1,5 @@
-Clash Royale API
-================
+Clash Royale types
+==================
 
 .. autosummary::
     :toctree: _clash_royale
