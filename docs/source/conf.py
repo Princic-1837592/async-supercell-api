@@ -6,7 +6,7 @@ import os
 import sys
 from datetime import datetime
 
-sys.path.insert(0, os.path.abspath("../.."))
+sys.path.insert(0, os.path.abspath('../..'))
 
 project = 'async-supercell-api'
 copyright = f'2022-{datetime.now().year}, Princic-1837592'
