@@ -73,6 +73,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.clans.ClanWarLogEntry`]
         """
         
         return await ClashRoyaleAPI.__create_object(
