@@ -3,6 +3,18 @@ from ...types import SupercellApiResponse
 
 
 class ClanWarLogEntry(SupercellApiResponse):
+    """
+    
+    :param standings:
+    :param seasonId:
+    :param participants:
+    :param createdDate:
+    :type standings: :class:`ClanWarStanding`
+    :type seasonId: int
+    :type participants: :class:`ClanWarParticipant`
+    :type createdDate: str
+    """
+    
     def __init__(self, standings: Optional[List[dict]] = None, seasonId: Optional[int] = None,
                  participants: Optional[List[dict]] = None, createdDate: Optional[str] = None, **kwargs):
         super().__init__(**kwargs)
@@ -13,6 +25,14 @@ class ClanWarLogEntry(SupercellApiResponse):
 
 
 class ClanWarStanding(SupercellApiResponse):
+    """
+    
+    :param trophyChange:
+    :param clan:
+    :type trophyChange: int
+    :type clan: :class:`ClanWarClan`
+    """
+    
     def __init__(self, trophyChange: Optional[int] = None, clan: Optional[dict] = None, **kwargs):
         super().__init__(**kwargs)
         self.trophyChange = trophyChange
@@ -20,6 +40,24 @@ class ClanWarStanding(SupercellApiResponse):
 
 
 class ClanWarParticipant(SupercellApiResponse):
+    """
+    
+    :param tag: 
+    :param name: 
+    :param cardsEarned: 
+    :param battlesPlayed: 
+    :param wins: 
+    :param collectionDayBattlesPlayed: 
+    :param numberOfBattles: 
+    :type tag: str
+    :type name: str
+    :type cardsEarned: int
+    :type battlesPlayed: int
+    :type wins: int
+    :type collectionDayBattlesPlayed: int
+    :type numberOfBattles: int
+    """
+    
     def __init__(self, tag: Optional[str] = None, name: Optional[str] = None, cardsEarned: Optional[int] = None,
                  battlesPlayed: Optional[int] = None, wins: Optional[int] = None,
                  collectionDayBattlesPlayed: Optional[int] = None,
@@ -35,11 +73,29 @@ class ClanWarParticipant(SupercellApiResponse):
 
 
 class ClanWarClan(SupercellApiResponse):
+    """
+    
+    :param crowns: 
+    :param tag: 
+    :param clanScore: 
+    :param badgeId: 
+    :param name: 
+    :param participants: 
+    :param battlesPlayed: 
+    :param wins: 
+    :type crowns: int
+    :type tag: str
+    :type clanScore: int
+    :type badgeId: int
+    :type name: str
+    :type participants: int
+    :type battlesPlayed: int
+    :type wins: int
+    """
+    
     def __init__(self, crowns: Optional[int] = None, tag: Optional[str] = None, clanScore: Optional[int] = None,
-                 badgeId: Optional[int] = None,
-                 name: Optional[str] = None, participants: Optional[int] = None, battlesPlayed: Optional[int] = None,
-                 wins: Optional[int] = None,
-                 **kwargs):
+                 badgeId: Optional[int] = None, name: Optional[str] = None, participants: Optional[int] = None,
+                 battlesPlayed: Optional[int] = None, wins: Optional[int] = None, **kwargs):
         super().__init__(**kwargs)
         self.crowns = crowns
         self.tag = tag
@@ -193,11 +249,32 @@ class CurrentClanWar(SupercellApiResponse):
 
 
 class CurrentRiverRace(SupercellApiResponse):
+    """
+    
+    :param state:
+    :param clan:
+    :param clans:
+    :param collectionEndTime:
+    :param warEndTime:
+    :param sectionIndex:
+    :param periodIndex:
+    :param periodType:
+    :param periodLogs:
+    :type state: str
+    :type clan:
+    :type clans: List[:class:`RiverRaceClan`]
+    :type collectionEndTime: str
+    :type warEndTime: str
+    :type sectionIndex: int
+    :type periodIndex: int
+    :type periodType: str
+    :type periodLogs: List[:class:`PeriodLog`]
+    """
+    
     def __init__(self, state: Optional[str] = None, clan: Optional[dict] = None, clans: Optional[List[dict]] = None,
                  collectionEndTime: Optional[str] = None, warEndTime: Optional[str] = None,
-                 sectionIndex: Optional[int] = None,
-                 periodIndex: Optional[int] = None, periodType: Optional[str] = None,
-                 periodLogs: Optional[List[dict]] = None, **kwargs):
+                 sectionIndex: Optional[int] = None, periodIndex: Optional[int] = None,
+                 periodType: Optional[str] = None, periodLogs: Optional[List[dict]] = None, **kwargs):
         super().__init__(**kwargs)
         self.state = state
         self.clan = None if clan is None else RiverRaceClan(**clan)
@@ -211,6 +288,14 @@ class CurrentRiverRace(SupercellApiResponse):
 
 
 class PeriodLog(SupercellApiResponse):
+    """
+    
+    :param items: 
+    :param periodIndex: 
+    :type items: List[:class:`PeriodLogEntry`]
+    :type periodIndex: int
+    """
+    
     def __init__(self, items: Optional[List[dict]] = None, periodIndex: Optional[int] = None, **kwargs):
         super().__init__(**kwargs)
         self.items = None if items is None else list(map(lambda x: PeriodLogEntry(**x), items))
@@ -218,10 +303,29 @@ class PeriodLog(SupercellApiResponse):
 
 
 class PeriodLogEntry(SupercellApiResponse):
+    """
+    
+    :param clan: 
+    :param pointsEarned: 
+    :param progressStartOfDay: 
+    :param progressEndOfDay: 
+    :param endOfDayRank: 
+    :param progressEarned: 
+    :param numOfDefensesRemaining: 
+    :param progressEarnedFromDefenses: 
+    :type clan: :class:`PeriodLogEntryClan`
+    :type pointsEarned: int
+    :type progressStartOfDay: int
+    :type progressEndOfDay: int
+    :type endOfDayRank: int
+    :type progressEarned: int
+    :type numOfDefensesRemaining: int
+    :type progressEarnedFromDefenses: int
+    """
+    
     def __init__(self, clan: Optional[dict] = None, pointsEarned: Optional[int] = None,
-                 progressStartOfDay: Optional[int] = None,
-                 progressEndOfDay: Optional[int] = None, endOfDayRank: Optional[int] = None,
-                 progressEarned: Optional[int] = None,
+                 progressStartOfDay: Optional[int] = None, progressEndOfDay: Optional[int] = None,
+                 endOfDayRank: Optional[int] = None, progressEarned: Optional[int] = None,
                  numOfDefensesRemaining: Optional[int] = None, progressEarnedFromDefenses: Optional[int] = None,
                  **kwargs):
         super().__init__(**kwargs)
@@ -236,6 +340,12 @@ class PeriodLogEntry(SupercellApiResponse):
 
 
 class PeriodLogEntryClan(SupercellApiResponse):
+    """
+    
+    :param tag: 
+    :type tag: str
+    """
+    
     def __init__(self, tag: Optional[str] = None, **kwargs):
         super().__init__(**kwargs)
         self.tag = tag

@@ -7,3 +7,4 @@ Available games
     :recursive:
 
     async_supercell_api
+
