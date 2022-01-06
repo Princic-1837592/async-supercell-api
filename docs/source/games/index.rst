@@ -3,6 +3,6 @@ Available games
 
 .. autosummary::
     :toctree: _autosummary
-    :members:
+    :recursive:
 
     async_supercell_api
