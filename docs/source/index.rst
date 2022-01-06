@@ -24,3 +24,9 @@ After installing, verify the installation:
 .. code-block:: python
 
     from async_supercell_api.clash_royale import ClashRoyaleAPI
+
+.. toctree::
+    :hidden:
+    :caption: Games
+
+    games/index
