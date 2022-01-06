@@ -115,6 +115,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.clans.Clan`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -148,6 +149,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.clans.RiverRaceLogEntry`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -212,6 +214,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.clans.ClanMember`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -288,6 +291,7 @@ class ClashRoyaleAPI:
         :param playerTag:
         :type playerTag: str
         :return:
+        :rtype: List[:class:`~types.players.Battle`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -312,6 +316,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.players.Item`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -343,6 +348,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.tournaments.TournamentHeader`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -391,6 +397,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.ClanRanking`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -419,6 +426,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.PlayerRanking`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -447,6 +455,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.ClanRanking`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -496,6 +505,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.PlayerRanking`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -523,6 +533,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.LeagueSeason`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -549,6 +560,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.Location`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -596,6 +608,7 @@ class ClashRoyaleAPI:
         :type after: Optional[str]
         :type before: Optional[str]
         :return:
+        :rtype: :class:`Page`[:class:`~types.locations.LadderTournamentRanking`]
         """
         
         return await ClashRoyaleAPI.__create_object(
@@ -616,7 +629,7 @@ class ClashRoyaleAPI:
         `Original method <https://developer.clashroyale.com/api-docs/index.html#!/globaltournaments/getGlobalTournaments>`_.
         
         :return:
-        :rtype: :class:`~types.global_tournaments.LadderTournament`
+        :rtype: List[:class:`~types.global_tournaments.LadderTournament`]
         """
         
         return await ClashRoyaleAPI.__create_object(
